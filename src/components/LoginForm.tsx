@@ -36,7 +36,7 @@ export function LoginForm({ onLogin }: LoginFormProps) {
             className="mx-auto h-16 w-16 mb-4 hover-glow transition-smooth"
           />
           <h1 className="text-2xl font-bold text-white mb-2">
-            EduPlatform
+            Dark Club Educação
           </h1>
           <p className="text-white/80">
             Bem-vindo(a) de volta

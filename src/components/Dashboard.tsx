@@ -1,135 +1,78 @@
-import { CourseCard } from "./CourseCard";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Trophy, BookOpen, Clock, Target } from "lucide-react";
 import heroImage from "@/assets/hero-education.jpg";
-import webDevImage from "@/assets/course-web-dev.jpg";
-import marketingImage from "@/assets/course-marketing.jpg";
-import dataScienceImage from "@/assets/course-data-science.jpg";
 
 interface DashboardProps {
   onNavigateToCourse: (courseId: string) => void;
 }
 
 export function Dashboard({ onNavigateToCourse }: DashboardProps) {
-  const featuredCourse = {
-    id: "web-dev-complete",
-    title: "Desenvolvimento Web Completo 2024",
-    description: "Aprenda HTML, CSS, JavaScript, React e Node.js do zero ao avançado. O curso mais completo de desenvolvimento web.",
-    image: webDevImage,
-    duration: "40h",
-    students: 2847,
-    rating: 4.8,
-    progress: 25,
-    level: "Iniciante",
-    category: "Programação"
-  };
-
-  const courses = [
-    {
-      id: "digital-marketing",
-      title: "Marketing Digital Estratégico",
-      description: "Domine as principais estratégias de marketing digital para impulsionar seu negócio online.",
-      image: marketingImage,
-      duration: "25h",
-      students: 1532,
-      rating: 4.7,
-      price: "R$ 197",
-      level: "Intermediário",
-      category: "Marketing"
-    },
-    {
-      id: "data-science",
-      title: "Ciência de Dados com Python",
-      description: "Análise de dados, machine learning e visualização usando Python e suas principais bibliotecas.",
-      image: dataScienceImage,
-      duration: "35h",
-      students: 923,
-      rating: 4.9,
-      progress: 65,
-      level: "Avançado",
-      category: "Data Science"
-    },
-    {
-      id: "ux-design",
-      title: "UX/UI Design Fundamentals",
-      description: "Aprenda os fundamentos do design de experiência do usuário e interface.",
-      image: webDevImage,
-      duration: "20h",
-      students: 1876,
-      rating: 4.6,
-      price: "R$ 147",
-      level: "Iniciante",
-      category: "Design"
-    },
-    {
-      id: "mobile-dev",
-      title: "Desenvolvimento Mobile React Native",
-      description: "Crie aplicativos móveis nativos para iOS e Android usando React Native.",
-      image: dataScienceImage,
-      duration: "30h",
-      students: 756,
-      rating: 4.8,
-      price: "R$ 247",
-      level: "Intermediário",
-      category: "Mobile"
-    }
-  ];
-
   const stats = [
     {
-      title: "Cursos Concluídos",
-      value: "3",
-      icon: Trophy,
-      color: "text-yellow-600"
-    },
-    {
-      title: "Cursos em Andamento",
-      value: "2",
-      icon: BookOpen,
-      color: "text-blue-600"
-    },
-    {
-      title: "Horas de Estudo",
-      value: "47h",
-      icon: Clock,
-      color: "text-green-600"
-    },
-    {
       title: "Progresso Geral",
-      value: "68%",
+      value: "25%",
       icon: Target,
-      color: "text-purple-600"
+      color: "text-primary"
+    },
+    {
+      title: "Módulos Concluídos",
+      value: "3/12",
+      icon: BookOpen,
+      color: "text-primary"
+    },
+    {
+      title: "Tempo de Estudo",
+      value: "12h",
+      icon: Clock,
+      color: "text-primary"
+    },
+    {
+      title: "Próxima Meta",
+      value: "Módulo 4",
+      icon: Trophy,
+      color: "text-primary"
     }
   ];
 
   return (
     <div className="container mx-auto px-4 py-8 space-y-8">
-      {/* Hero Section */}
+      {/* Hero Section - Curso Único */}
       <section className="relative rounded-2xl overflow-hidden shadow-elevated">
         <div className="absolute inset-0">
           <img 
             src={heroImage} 
-            alt="Hero" 
+            alt="Dark Club Educação" 
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 gradient-hero opacity-90" />
         </div>
         <div className="relative z-10 p-8 md:p-12 text-white">
           <div className="max-w-2xl">
+            <span className="inline-block bg-primary/20 text-white px-3 py-1 rounded-full text-sm font-medium mb-4">
+              🔥 Curso Exclusivo
+            </span>
             <h1 className="text-3xl md:text-4xl font-bold mb-4 animate-fade-in">
-              Bem-vindo de volta, João! 👋
+              Dark Club - Metodologia Avançada
             </h1>
             <p className="text-lg mb-6 text-white/90 animate-slide-up">
-              Continue sua jornada de aprendizado. Você está fazendo um ótimo progresso!
+              Acesso exclusivo ao conteúdo premium do Dark Club. 
+              Transforme sua mentalidade e desenvolva habilidades de elite.
             </p>
-            <div className="flex items-center space-x-4 animate-slide-up">
-              <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4">
-                <p className="text-sm text-white/80">Progresso Geral</p>
-                <div className="mt-2">
-                  <Progress value={68} className="h-2 bg-white/20" />
-                  <p className="text-lg font-semibold mt-1">68% concluído</p>
+            <div className="flex flex-col sm:flex-row gap-4 animate-slide-up">
+              <Button 
+                onClick={() => onNavigateToCourse("dark-club")}
+                size="lg" 
+                className="bg-white text-primary hover:bg-white/90"
+              >
+                Continuar Assistindo
+              </Button>
+              <div className="flex items-center text-white/80">
+                <div className="w-32 bg-white/20 rounded-full h-2 mr-3">
+                  <div className="bg-white rounded-full h-2 w-1/4"></div>
                 </div>
+                <span className="text-sm">25% concluído</span>
               </div>
             </div>
           </div>
@@ -140,8 +83,8 @@ export function Dashboard({ onNavigateToCourse }: DashboardProps) {
       <section>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {stats.map((stat, index) => (
-            <Card key={index} className="shadow-card hover-lift transition-smooth">
-              <CardContent className="p-4 text-center">
+            <Card key={index} className="gradient-card shadow-card hover-lift transition-smooth">
+              <CardContent className="p-6 text-center">
                 <stat.icon className={`h-8 w-8 mx-auto mb-2 ${stat.color}`} />
                 <p className="text-2xl font-bold">{stat.value}</p>
                 <p className="text-sm text-muted-foreground">{stat.title}</p>
@@ -151,34 +94,42 @@ export function Dashboard({ onNavigateToCourse }: DashboardProps) {
         </div>
       </section>
 
-      {/* Featured Course */}
+      {/* Próximos Módulos */}
       <section>
-        <h2 className="text-2xl font-bold mb-6">Continue de onde parou</h2>
-        <CourseCard 
-          course={featuredCourse}
-          variant="featured"
-          onContinue={onNavigateToCourse}
-        />
-      </section>
-
-      {/* Course Grid */}
-      <section>
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-2xl font-bold">Explore outros cursos</h2>
-          <button className="text-primary hover:text-primary/80 font-medium transition-colors">
-            Ver todos →
-          </button>
-        </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {courses.map((course) => (
-            <CourseCard 
-              key={course.id}
-              course={course}
-              onEnroll={onNavigateToCourse}
-              onContinue={onNavigateToCourse}
-            />
-          ))}
+        <h2 className="text-2xl font-bold mb-6">Próximos Módulos</h2>
+        <div className="grid md:grid-cols-2 gap-6">
+          <Card className="gradient-card shadow-card hover-lift transition-smooth">
+            <CardContent className="p-6">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-lg font-semibold">Módulo 4: Estratégias Avançadas</h3>
+                <span className="bg-primary/20 text-primary px-2 py-1 rounded text-xs">Próximo</span>
+              </div>
+              <p className="text-muted-foreground mb-4">
+                Aprenda técnicas avançadas para maximizar seus resultados.
+              </p>
+              <Button 
+                onClick={() => onNavigateToCourse("dark-club")}
+                className="w-full"
+              >
+                Iniciar Módulo
+              </Button>
+            </CardContent>
+          </Card>
+          
+          <Card className="gradient-card shadow-card">
+            <CardContent className="p-6">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-lg font-semibold">Módulo 5: Implementação</h3>
+                <span className="bg-muted text-muted-foreground px-2 py-1 rounded text-xs">Bloqueado</span>
+              </div>
+              <p className="text-muted-foreground mb-4">
+                Coloque em prática tudo o que aprendeu nos módulos anteriores.
+              </p>
+              <Button disabled className="w-full">
+                Complete o Módulo 4 primeiro
+              </Button>
+            </CardContent>
+          </Card>
         </div>
       </section>
     </div>

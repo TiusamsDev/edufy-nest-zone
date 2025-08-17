@@ -32,7 +32,7 @@ export function Header({ onLogout, onNavigate, currentPage }: HeaderProps) {
           >
             <img src={logo} alt="Logo" className="h-8 w-8" />
             <span className="font-bold text-xl gradient-text bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-              EduPlatform
+              Dark Club Educação
             </span>
           </div>
 

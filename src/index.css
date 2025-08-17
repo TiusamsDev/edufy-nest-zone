@@ -2,58 +2,58 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Plataforma de Cursos Online - Design System Moderno
-Paleta inspirada em gradientes roxo/violeta com azul para transmitir educação e tecnologia
+/* Dark Club Educação - Design System Dark
+Paleta em tons de roxo e preto para transmitir exclusividade e modernidade
 */
 
 @layer base {
   :root {
-    /* Backgrounds */
-    --background: 250 100% 99%;
-    --foreground: 240 10% 15%;
+    /* Backgrounds - Dark theme */
+    --background: 0 0% 8%;
+    --foreground: 0 0% 95%;
 
     /* Cards e elementos de superfície */
-    --card: 0 0% 100%;
-    --card-foreground: 240 10% 15%;
+    --card: 0 0% 12%;
+    --card-foreground: 0 0% 95%;
 
     /* Popover */
-    --popover: 0 0% 100%;
-    --popover-foreground: 240 10% 15%;
+    --popover: 0 0% 12%;
+    --popover-foreground: 0 0% 95%;
 
-    /* Cores primárias - Gradiente roxo/violeta */
-    --primary: 258 85% 66%;
+    /* Cores primárias - Roxo vibrante */
+    --primary: 280 100% 70%;
     --primary-foreground: 0 0% 100%;
-    --primary-glow: 270 91% 75%;
+    --primary-glow: 285 100% 80%;
 
-    /* Cores secundárias - Azul suave */
-    --secondary: 214 100% 97%;
-    --secondary-foreground: 258 85% 66%;
+    /* Cores secundárias - Roxo escuro */
+    --secondary: 0 0% 16%;
+    --secondary-foreground: 0 0% 95%;
 
-    /* Cores neutras */
-    --muted: 220 15% 96%;
-    --muted-foreground: 240 5% 45%;
+    /* Cores neutras - Tons escuros */
+    --muted: 0 0% 20%;
+    --muted-foreground: 0 0% 65%;
 
-    /* Accent - Azul vibrante */
-    --accent: 214 85% 60%;
+    /* Accent - Roxo claro */
+    --accent: 275 85% 60%;
     --accent-foreground: 0 0% 100%;
 
     /* Destructive */
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    /* Borders e inputs */
-    --border: 220 13% 91%;
-    --input: 220 13% 91%;
-    --ring: 258 85% 66%;
+    /* Borders e inputs - Tons escuros */
+    --border: 0 0% 25%;
+    --input: 0 0% 25%;
+    --ring: 280 100% 70%;
 
-    /* Gradientes personalizados */
-    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
-    --gradient-hero: linear-gradient(135deg, hsl(258 85% 66%), hsl(214 85% 60%));
-    --gradient-card: linear-gradient(145deg, hsl(0 0% 100%), hsl(220 15% 98%));
+    /* Gradientes personalizados - Dark + Purple */
+    --gradient-primary: linear-gradient(135deg, hsl(280 100% 70%), hsl(285 100% 80%));
+    --gradient-hero: linear-gradient(135deg, hsl(0 0% 8%), hsl(280 100% 20%));
+    --gradient-card: linear-gradient(145deg, hsl(0 0% 12%), hsl(280 50% 8%));
 
-    /* Sombras elegantes */
-    --shadow-card: 0 4px 20px -2px hsl(var(--primary) / 0.1);
-    --shadow-elevated: 0 10px 40px -10px hsl(var(--primary) / 0.2);
+    /* Sombras elegantes - Purple glow */
+    --shadow-card: 0 4px 20px -2px hsl(280 100% 70% / 0.2);
+    --shadow-elevated: 0 10px 40px -10px hsl(280 100% 70% / 0.3);
 
     /* Raio de borda */
     --radius: 0.75rem;
@@ -76,52 +76,52 @@ Paleta inspirada em gradientes roxo/violeta com azul para transmitir educação 
   }
 
   .dark {
-    /* Backgrounds escuros */
-    --background: 240 15% 8%;
-    --foreground: 250 100% 99%;
+    /* Backgrounds escuros - ainda mais escuro */
+    --background: 0 0% 4%;
+    --foreground: 0 0% 98%;
 
     /* Cards dark */
-    --card: 240 15% 10%;
-    --card-foreground: 250 100% 99%;
+    --card: 0 0% 8%;
+    --card-foreground: 0 0% 98%;
 
     /* Popover dark */
-    --popover: 240 15% 10%;
-    --popover-foreground: 250 100% 99%;
+    --popover: 0 0% 8%;
+    --popover-foreground: 0 0% 98%;
 
-    /* Primary no dark */
-    --primary: 270 91% 75%;
-    --primary-foreground: 240 15% 8%;
-    --primary-glow: 258 85% 66%;
+    /* Primary no dark - Roxo mais vibrante */
+    --primary: 285 100% 80%;
+    --primary-foreground: 0 0% 4%;
+    --primary-glow: 290 100% 85%;
 
     /* Secondary dark */
-    --secondary: 240 15% 15%;
-    --secondary-foreground: 250 100% 99%;
+    --secondary: 0 0% 12%;
+    --secondary-foreground: 0 0% 98%;
 
     /* Muted dark */
-    --muted: 240 15% 15%;
-    --muted-foreground: 240 5% 65%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 70%;
 
     /* Accent dark */
-    --accent: 214 85% 60%;
-    --accent-foreground: 240 15% 8%;
+    --accent: 275 85% 65%;
+    --accent-foreground: 0 0% 4%;
 
     /* Destructive dark */
     --destructive: 0 84% 60%;
-    --destructive-foreground: 250 100% 99%;
+    --destructive-foreground: 0 0% 98%;
 
     /* Borders dark */
-    --border: 240 15% 20%;
-    --input: 240 15% 20%;
-    --ring: 270 91% 75%;
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    --ring: 285 100% 80%;
 
     /* Gradientes dark */
-    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
-    --gradient-hero: linear-gradient(135deg, hsl(270 91% 75%), hsl(214 85% 60%));
-    --gradient-card: linear-gradient(145deg, hsl(240 15% 10%), hsl(240 15% 12%));
+    --gradient-primary: linear-gradient(135deg, hsl(285 100% 80%), hsl(290 100% 85%));
+    --gradient-hero: linear-gradient(135deg, hsl(0 0% 4%), hsl(285 100% 15%));
+    --gradient-card: linear-gradient(145deg, hsl(0 0% 8%), hsl(285 50% 5%));
 
     /* Sombras dark */
-    --shadow-card: 0 4px 20px -2px hsl(0 0% 0% / 0.3);
-    --shadow-elevated: 0 10px 40px -10px hsl(0 0% 0% / 0.5);
+    --shadow-card: 0 4px 20px -2px hsl(285 100% 80% / 0.3);
+    --shadow-elevated: 0 10px 40px -10px hsl(285 100% 80% / 0.4);
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;

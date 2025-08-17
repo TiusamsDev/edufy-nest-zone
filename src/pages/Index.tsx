@@ -31,7 +31,7 @@ const Index = () => {
   };
 
   const handleNavigateToCourse = (courseId: string) => {
-    setCurrentCourseId(courseId);
+    setCurrentCourseId("dark-club"); // Sempre vai para o curso único
     setCurrentState("course-detail");
   };
 
