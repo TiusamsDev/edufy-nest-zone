@@ -1,9 +1,12 @@
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/hooks/useAuth";
-import { Plus, Users, Settings } from "lucide-react";
+import { Plus, Users, Settings, LogOut } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import logo from "@/assets/logo.png";
 
 export function Header() {
   const { profile, userRole, signOut, canManageCourses, canManageUsers } = useAuth();
+  const navigate = useNavigate();
 
   const getUserTypeLabel = () => {
     switch (userRole) {
@@ -23,11 +26,11 @@ export function Header() {
       <div className="flex items-center justify-between max-w-7xl mx-auto">
         <div className="flex items-center space-x-4">
           <button 
-            onClick={() => window.location.href = '/'} 
+            onClick={() => navigate('/')} 
             className="flex items-center space-x-4 hover:opacity-80 transition-opacity"
           >
-            <div className="w-10 h-10 rounded-full gradient-primary flex items-center justify-center">
-              <span className="text-lg font-bold text-white">DC</span>
+            <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center overflow-hidden">
+              <img src={logo} alt="Dark Club Academy" className="w-8 h-8 object-contain" />
             </div>
             <div>
               <h1 className="text-xl font-bold text-foreground">Dark Club Academy</h1>
@@ -38,20 +41,32 @@ export function Header() {
         
         <nav className="flex items-center space-x-4">
           {canManageCourses() && (
-            <Button variant="ghost" className="text-foreground hover:text-accent">
+            <Button 
+              variant="ghost" 
+              onClick={() => navigate('/new-course')}
+              className="text-foreground hover:text-accent"
+            >
               <Plus className="w-4 h-4 mr-2" />
               Novo Curso
             </Button>
           )}
           
           {canManageUsers() && (
-            <Button variant="ghost" className="text-foreground hover:text-accent">
+            <Button 
+              variant="ghost" 
+              onClick={() => navigate('/users')}
+              className="text-foreground hover:text-accent"
+            >
               <Users className="w-4 h-4 mr-2" />
               Usuários
             </Button>
           )}
           
-          <Button variant="ghost" className="text-foreground hover:text-accent">
+          <Button 
+            variant="ghost" 
+            onClick={() => navigate('/profile')}
+            className="text-foreground hover:text-accent"
+          >
             <Settings className="w-4 h-4 mr-2" />
             Perfil
           </Button>
@@ -61,6 +76,7 @@ export function Header() {
             onClick={signOut}
             className="border-border text-foreground hover:bg-secondary"
           >
+            <LogOut className="w-4 h-4 mr-2" />
             Sair
           </Button>
         </nav>

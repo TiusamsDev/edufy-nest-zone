@@ -6,6 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useAuth } from "@/hooks/useAuth";
 import { Navigate } from "react-router-dom";
+import logo from "@/assets/logo.png";
 
 export default function Auth() {
   const [email, setEmail] = useState("");
@@ -34,11 +35,11 @@ export default function Auth() {
   };
 
   return (
-    <div className="min-h-screen bg-background flex items-center justify-center p-4">
+    <div className="min-h-screen bg-overlay flex items-center justify-center p-4">
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
-          <div className="w-16 h-16 rounded-full gradient-primary flex items-center justify-center mx-auto mb-4">
-            <span className="text-2xl font-bold text-white">DC</span>
+          <div className="w-16 h-16 rounded-full bg-white/10 flex items-center justify-center mx-auto mb-4 overflow-hidden">
+            <img src={logo} alt="Dark Club Academy" className="w-12 h-12 object-contain" />
           </div>
           <CardTitle className="text-2xl">Dark Club Academy</CardTitle>
           <CardDescription>Entre com suas credenciais para acessar a plataforma</CardDescription>
