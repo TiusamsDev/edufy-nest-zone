@@ -27,7 +27,7 @@ export function LoginForm({ onLogin }: LoginFormProps) {
             <span className="text-2xl font-bold text-white">DC</span>
           </div>
           <CardTitle className="text-2xl font-bold text-foreground">
-            Dark Club Educação
+            Dark Club Academy
           </CardTitle>
           <CardDescription className="text-muted-foreground">
             Acesse sua conta para continuar
