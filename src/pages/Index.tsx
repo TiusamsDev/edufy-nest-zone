@@ -1,29 +1,17 @@
 import { useState } from "react";
-import { LoginForm } from "@/components/LoginForm";
+import { Navigate } from "react-router-dom";
 import { Header } from "@/components/Header";
 import { Dashboard } from "@/components/Dashboard";
 import { CoursePage } from "@/components/CoursePage";
+import { useAuth } from "@/hooks/useAuth";
 
-type UserType = 'admin' | 'producer' | 'student';
-type View = 'login' | 'dashboard' | 'course';
+type View = 'dashboard' | 'course';
 
 const Index = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userType, setUserType] = useState<UserType>('student');
-  const [currentView, setCurrentView] = useState<View>('login');
+  const [currentView, setCurrentView] = useState<View>('dashboard');
   const [selectedCourseId, setSelectedCourseId] = useState<string>('');
-
-  const handleLogin = (type: UserType) => {
-    setUserType(type);
-    setIsLoggedIn(true);
-    setCurrentView('dashboard');
-  };
-
-  const handleLogout = () => {
-    setIsLoggedIn(false);
-    setCurrentView('login');
-    setSelectedCourseId('');
-  };
+  
+  const { user, userRole, loading } = useAuth();
 
   const handleCourseClick = (courseId: string) => {
     setSelectedCourseId(courseId);
@@ -35,15 +23,28 @@ const Index = () => {
     setSelectedCourseId('');
   };
 
-  if (!isLoggedIn) {
-    return <LoginForm onLogin={handleLogin} />;
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-16 h-16 rounded-full gradient-primary flex items-center justify-center mx-auto mb-4">
+            <span className="text-2xl font-bold text-white">DC</span>
+          </div>
+          <p className="text-muted-foreground">Carregando...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (!user) {
+    return <Navigate to="/auth" replace />;
   }
 
   return (
     <div className="min-h-screen bg-background">
-      <Header userType={userType} onLogout={handleLogout} />
+      <Header />
       {currentView === 'dashboard' && (
-        <Dashboard userType={userType} onCourseClick={handleCourseClick} />
+        <Dashboard onCourseClick={handleCourseClick} />
       )}
       {currentView === 'course' && (
         <CoursePage courseId={selectedCourseId} onBack={handleBackToDashboard} />

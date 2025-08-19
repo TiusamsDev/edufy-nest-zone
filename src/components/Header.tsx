@@ -1,19 +1,20 @@
 import { Button } from "@/components/ui/button";
+import { useAuth } from "@/hooks/useAuth";
+import { Plus, Users, Settings } from "lucide-react";
 
-interface HeaderProps {
-  userType: 'admin' | 'producer' | 'student';
-  onLogout: () => void;
-}
+export function Header() {
+  const { profile, userRole, signOut, canManageCourses, canManageUsers } = useAuth();
 
-export function Header({ userType, onLogout }: HeaderProps) {
   const getUserTypeLabel = () => {
-    switch (userType) {
+    switch (userRole) {
       case 'admin':
         return 'Administrador';
       case 'producer':
         return 'Produtor';
       case 'student':
         return 'Estudante';
+      default:
+        return 'Usuário';
     }
   };
 
@@ -31,15 +32,28 @@ export function Header({ userType, onLogout }: HeaderProps) {
         </div>
         
         <nav className="flex items-center space-x-4">
+          {canManageCourses() && (
+            <Button variant="ghost" className="text-foreground hover:text-accent">
+              <Plus className="w-4 h-4 mr-2" />
+              Novo Curso
+            </Button>
+          )}
+          
+          {canManageUsers() && (
+            <Button variant="ghost" className="text-foreground hover:text-accent">
+              <Users className="w-4 h-4 mr-2" />
+              Usuários
+            </Button>
+          )}
+          
           <Button variant="ghost" className="text-foreground hover:text-accent">
-            Cursos
-          </Button>
-          <Button variant="ghost" className="text-foreground hover:text-accent">
+            <Settings className="w-4 h-4 mr-2" />
             Perfil
           </Button>
+          
           <Button 
             variant="outline" 
-            onClick={onLogout}
+            onClick={signOut}
             className="border-border text-foreground hover:bg-secondary"
           >
             Sair
