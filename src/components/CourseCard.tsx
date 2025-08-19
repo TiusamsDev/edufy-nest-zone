@@ -8,7 +8,7 @@ interface Course {
   description: string;
   is_extra?: boolean;
   is_published: boolean;
-  created_by: string;
+  created_by?: string;
 }
 
 interface CourseCardProps {
