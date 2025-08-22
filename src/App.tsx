@@ -12,6 +12,9 @@ import Profile from "./pages/Profile";
 import CreateImage from "./pages/CreateImage";
 import CreateVideo from "./pages/CreateVideo";
 import CreateScript from "./pages/CreateScript";
+import AIVoice from "./pages/AIVoice";
+import Templates from "./pages/Templates";
+import SEOKeywords from "./pages/SEOKeywords";
 
 const queryClient = new QueryClient();
 
@@ -27,9 +30,12 @@ const App = () => (
           <Route path="/new-course" element={<NewCourse />} />
           <Route path="/users" element={<Users />} />
           <Route path="/profile" element={<Profile />} />
-          <Route path="/create-image" element={<CreateImage />} />
-          <Route path="/create-video" element={<CreateVideo />} />
-          <Route path="/create-script" element={<CreateScript />} />
+            <Route path="/create-image" element={<CreateImage />} />
+            <Route path="/create-video" element={<CreateVideo />} />
+            <Route path="/create-script" element={<CreateScript />} />
+            <Route path="/ai-voice" element={<AIVoice />} />
+            <Route path="/templates" element={<Templates />} />
+            <Route path="/seo-keywords" element={<SEOKeywords />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

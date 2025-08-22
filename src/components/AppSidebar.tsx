@@ -1,16 +1,22 @@
-import { useState } from "react";
+import React from "react";
 import { 
   Image, 
   Video, 
   FileText, 
   Mic, 
   Palette, 
-  Sparkles, 
   Bot, 
   PenTool,
-  Music,
-  Megaphone,
-  Home
+  Home,
+  Play,
+  Layout,
+  Search,
+  Calendar,
+  BarChart3,
+  Lightbulb,
+  MessageCircle,
+  Users,
+  HeartHandshake,
 } from "lucide-react";
 import { useNavigate, useLocation } from "react-router-dom";
 
@@ -35,70 +41,104 @@ const navigationItems = [
   }
 ];
 
-const aiTools = [
+// Seção Produção (Azul)
+const productionTools = [
   { 
     title: "Criar Imagem", 
     url: "/create-image", 
     icon: Image,
-    description: "Gere imagens com IA",
-    gradient: "from-pink-500 to-violet-500"
+    description: "Gere imagens com IA"
   },
   { 
     title: "Criar Vídeo", 
     url: "/create-video", 
     icon: Video,
-    description: "Crie vídeos automaticamente",
-    gradient: "from-blue-500 to-cyan-500"
+    description: "Crie vídeos automaticamente"
   },
   { 
     title: "Criar Roteiro", 
     url: "/create-script", 
     icon: FileText,
-    description: "Roteiros para vídeos e conteúdo",
-    gradient: "from-green-500 to-emerald-500"
+    description: "Roteiros para vídeos e conteúdo"
   },
   { 
     title: "Narração IA", 
     url: "/ai-voice", 
     icon: Mic,
-    description: "Voz artificial para seus vídeos",
-    gradient: "from-orange-500 to-red-500"
-  },
+    description: "Voz artificial para seus vídeos"
+  }
+];
+
+// Seção Identidade Visual (Roxo)
+const brandingTools = [
   { 
     title: "Identidade Visual", 
     url: "/brand-identity", 
     icon: Palette,
-    description: "Crie logos e identidade visual",
-    gradient: "from-purple-500 to-pink-500"
+    description: "Logos, cores, identidade do canal"
   },
   { 
     title: "Thumbnails", 
     url: "/thumbnails", 
     icon: PenTool,
-    description: "Miniaturas chamativas",
-    gradient: "from-yellow-500 to-orange-500"
+    description: "Miniaturas chamativas"
   },
   { 
-    title: "Trilha Sonora", 
-    url: "/music-ai", 
-    icon: Music,
-    description: "Música de fundo personalizada",
-    gradient: "from-indigo-500 to-purple-500"
+    title: "Templates", 
+    url: "/templates", 
+    icon: Layout,
+    description: "Intros, overlays, lower thirds"
+  }
+];
+
+// Seção Crescimento (Verde)
+const growthTools = [
+  { 
+    title: "SEO e Palavras-chave", 
+    url: "/seo-keywords", 
+    icon: Search,
+    description: "Títulos, descrições e tags otimizadas"
   },
   { 
-    title: "Copy para Redes", 
-    url: "/social-copy", 
-    icon: Megaphone,
-    description: "Textos para posts e descrições",
-    gradient: "from-teal-500 to-blue-500"
+    title: "Agenda de Postagem", 
+    url: "/posting-schedule", 
+    icon: Calendar,
+    description: "Calendário para planejar vídeos"
   },
+  { 
+    title: "Monitor de Desempenho", 
+    url: "/performance-monitor", 
+    icon: BarChart3,
+    description: "Métricas de views, inscritos e retenção"
+  },
+  { 
+    title: "Ideias de Conteúdo", 
+    url: "/content-ideas", 
+    icon: Lightbulb,
+    description: "Gerador de tópicos e tendências"
+  }
+];
+
+// Seção Suporte e Comunidade (Laranja)
+const supportTools = [
   { 
     title: "Assistente IA", 
     url: "/ai-assistant", 
     icon: Bot,
-    description: "Chat para dúvidas e ideias",
-    gradient: "from-slate-500 to-gray-500"
+    description: "Chat para dúvidas e ideias"
   },
+  { 
+    title: "Fórum / Comunidade", 
+    url: "/community", 
+    icon: MessageCircle,
+    description: "Troca de ideias entre alunos"
+  },
+  { 
+    title: "Mentorias / Suporte", 
+    url: "/mentoring", 
+    icon: HeartHandshake,
+    description: "Suporte personalizado"
+  }
 ];
 
 export function AppSidebar() {
@@ -113,35 +153,72 @@ export function AppSidebar() {
 
   const isActive = (url: string) => location.pathname === url;
 
+  const renderSection = (
+    items: typeof productionTools,
+    title: string,
+    icon: any,
+    colorClass: string
+  ) => (
+    <SidebarGroup className="mb-6">
+      <SidebarGroupLabel className={`font-semibold mb-3 px-3 py-2 rounded-lg ${colorClass} flex items-center gap-2`}>
+        {React.createElement(icon, { className: "w-4 h-4" })}
+        {!isCollapsed && title}
+      </SidebarGroupLabel>
+      
+      <SidebarGroupContent>
+        <SidebarMenu className="space-y-1">
+          {items.map((item) => (
+            <SidebarMenuItem key={item.title}>
+              <SidebarMenuButton 
+                onClick={() => handleToolClick(item.url)}
+                className={`group relative overflow-hidden transition-all duration-200 rounded-lg mx-1 ${
+                  isActive(item.url) 
+                    ? 'bg-primary/15 text-primary border border-primary/30 shadow-sm' 
+                    : 'hover:bg-accent/60 hover:shadow-sm'
+                }`}
+                tooltip={isCollapsed ? item.title : undefined}
+              >
+                <item.icon className={`w-4 h-4 transition-colors ${
+                  isActive(item.url) ? 'text-primary' : 'text-muted-foreground group-hover:text-foreground'
+                }`} />
+                {!isCollapsed && (
+                  <div className="flex flex-col items-start">
+                    <span className="font-medium text-sm text-foreground">{item.title}</span>
+                    <span className="text-xs text-muted-foreground leading-tight">{item.description}</span>
+                  </div>
+                )}
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          ))}
+        </SidebarMenu>
+      </SidebarGroupContent>
+    </SidebarGroup>
+  );
+
   return (
-    <Sidebar className="border-r border-border/50 bg-gradient-to-b from-card/80 to-card/40 backdrop-blur-xl">
-      <SidebarContent className="p-2">
-        {/* Navegação Principal */}
-        <SidebarGroup>
-          <SidebarGroupLabel className="text-muted-foreground font-medium mb-2 px-2">
-            <Home className="w-4 h-4 mr-2" />
-            {!isCollapsed && "Navegação"}
-          </SidebarGroupLabel>
-          
+    <Sidebar className="border-r border-border/50 bg-card/50 backdrop-blur-xl">
+      <SidebarContent className="p-3">
+        {/* Dashboard */}
+        <SidebarGroup className="mb-6">
           <SidebarGroupContent>
             <SidebarMenu>
               {navigationItems.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton 
                     onClick={() => handleToolClick(item.url)}
-                    className={`group relative overflow-hidden transition-all duration-300 hover:scale-105 mb-1 ${
+                    className={`group relative overflow-hidden transition-all duration-200 rounded-lg mb-2 ${
                       isActive(item.url) 
-                        ? 'bg-primary/20 text-primary border border-primary/30' 
-                        : 'hover:bg-accent/50'
+                        ? 'bg-primary/15 text-primary border border-primary/30 shadow-sm' 
+                        : 'hover:bg-accent/60 hover:shadow-sm'
                     }`}
                     tooltip={isCollapsed ? item.title : undefined}
                   >
-                    <item.icon className={`w-4 h-4 transition-colors ${
-                      isActive(item.url) ? 'text-primary' : 'text-muted-foreground group-hover:text-accent'
+                    <item.icon className={`w-5 h-5 transition-colors ${
+                      isActive(item.url) ? 'text-primary' : 'text-muted-foreground group-hover:text-foreground'
                     }`} />
                     {!isCollapsed && (
                       <div className="flex flex-col items-start">
-                        <span className="font-medium text-foreground">{item.title}</span>
+                        <span className="font-semibold text-foreground">{item.title}</span>
                         <span className="text-xs text-muted-foreground">{item.description}</span>
                       </div>
                     )}
@@ -152,42 +229,13 @@ export function AppSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
 
-        {/* Ferramentas IA */}
-        <SidebarGroup>
-          <SidebarGroupLabel className="text-muted-foreground font-medium mb-2 px-2">
-            <Sparkles className="w-4 h-4 mr-2" />
-            {!isCollapsed && "Ferramentas IA"}
-          </SidebarGroupLabel>
-          
-          <SidebarGroupContent>
-            <SidebarMenu>
-              {aiTools.map((tool) => (
-                <SidebarMenuItem key={tool.title}>
-                  <SidebarMenuButton 
-                    onClick={() => handleToolClick(tool.url)}
-                    className={`group relative overflow-hidden transition-all duration-300 hover:scale-105 mb-1 ${
-                      isActive(tool.url) 
-                        ? 'bg-primary/20 text-primary border border-primary/30' 
-                        : 'hover:bg-accent/50'
-                    }`}
-                    tooltip={isCollapsed ? tool.title : undefined}
-                  >
-                    <div className={`absolute inset-0 bg-gradient-to-r ${tool.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-300`} />
-                    <tool.icon className={`w-4 h-4 transition-colors relative z-10 ${
-                      isActive(tool.url) ? 'text-primary' : 'text-muted-foreground group-hover:text-accent'
-                    }`} />
-                    {!isCollapsed && (
-                      <div className="flex flex-col items-start relative z-10">
-                        <span className="font-medium text-foreground">{tool.title}</span>
-                        <span className="text-xs text-muted-foreground">{tool.description}</span>
-                      </div>
-                    )}
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
+        {!isCollapsed && <div className="h-px bg-border mx-3 mb-6" />}
+
+        {/* Seções organizadas com cores */}
+        {renderSection(productionTools, "Produção", Play, "bg-blue-500/10 text-blue-700 dark:text-blue-300")}
+        {renderSection(brandingTools, "Identidade Visual", Palette, "bg-purple-500/10 text-purple-700 dark:text-purple-300")}
+        {renderSection(growthTools, "Crescimento", BarChart3, "bg-green-500/10 text-green-700 dark:text-green-300")}
+        {renderSection(supportTools, "Suporte e Comunidade", Users, "bg-orange-500/10 text-orange-700 dark:text-orange-300")}
       </SidebarContent>
     </Sidebar>
   );
