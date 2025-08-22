@@ -52,6 +52,22 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
+				production: {
+					DEFAULT: 'hsl(var(--production))',
+					muted: 'hsl(var(--production-muted))'
+				},
+				identity: {
+					DEFAULT: 'hsl(var(--identity))',
+					muted: 'hsl(var(--identity-muted))'
+				},
+				growth: {
+					DEFAULT: 'hsl(var(--growth))',
+					muted: 'hsl(var(--growth-muted))'
+				},
+				support: {
+					DEFAULT: 'hsl(var(--support))',
+					muted: 'hsl(var(--support-muted))'
+				},
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
 					foreground: 'hsl(var(--sidebar-foreground))',

@@ -35,10 +35,10 @@ export function CourseCard({ course, onClick, progress }: CourseCardProps) {
 
   const getCategoryColor = (category?: string) => {
     switch (category) {
-      case 'fundamentos': return 'bg-blue-500/10 text-blue-400 border-blue-500/20';
-      case 'criacao-canal': return 'bg-purple-500/10 text-purple-400 border-purple-500/20';
-      case 'monetizacao': return 'bg-green-500/10 text-green-400 border-green-500/20';
-      default: return 'bg-accent/10 text-accent border-accent/20';
+      case 'fundamentos': return 'bg-production-muted text-production border-production/30';
+      case 'criacao-canal': return 'bg-identity-muted text-identity border-identity/30';
+      case 'monetizacao': return 'bg-growth-muted text-growth border-growth/30';
+      default: return 'bg-accent/15 text-accent border-accent/30';
     }
   };
 
@@ -64,62 +64,75 @@ export function CourseCard({ course, onClick, progress }: CourseCardProps) {
   const IconComponent = getCategoryIcon(course.category);
 
   return (
-    <Card className={`gradient-card border-border/50 hover:border-accent/50 transition-all duration-300 cursor-pointer group relative overflow-hidden ${course.is_featured ? 'ring-2 ring-accent/30' : ''}`}
+    <Card className={`gradient-card border-border/30 hover:border-primary/30 transition-all duration-500 cursor-pointer group relative overflow-hidden shadow-soft hover:shadow-glow hover:scale-[1.02] ${course.is_featured ? 'ring-2 ring-primary/40 shadow-primary/20' : ''}`}
           onClick={onClick}>
       {course.is_featured && (
-        <div className="absolute top-0 right-0 bg-accent text-accent-foreground text-xs font-semibold px-2 py-1 rounded-bl-md">
-          Destaque
+        <div className="absolute top-4 right-4 bg-gradient-primary text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg">
+          ⭐ Destaque
         </div>
       )}
       
-      <CardHeader className="space-y-3">
-        <div className="flex items-start justify-between">
-          <div className="flex items-center gap-3">
-            <div className={`p-2 rounded-lg border ${getCategoryColor(course.category)}`}>
-              <IconComponent className="w-4 h-4" />
-            </div>
-            <div>
-              <CardTitle className="text-lg font-semibold text-foreground group-hover:text-accent transition-colors">
-                {course.title}
-              </CardTitle>
-              <div className="flex items-center gap-2 mt-1">
-                <Badge variant="outline" className="text-xs">
-                  {getLevelText(course.level)}
+      <CardHeader className="space-y-4 p-6">
+        <div className="flex items-start gap-4">
+          <div className={`p-3 rounded-xl border shadow-sm ${getCategoryColor(course.category)}`}>
+            <IconComponent className="w-5 h-5" />
+          </div>
+          <div className="flex-1 min-w-0">
+            <CardTitle className="text-xl font-bold text-foreground group-hover:text-primary transition-colors leading-tight">
+              {course.title}
+            </CardTitle>
+            <div className="flex items-center gap-2 mt-2 flex-wrap">
+              <Badge variant="outline" className="text-xs font-medium bg-muted/50">
+                {getLevelText(course.level)}
+              </Badge>
+              {course.duration_minutes && (
+                <Badge variant="outline" className="text-xs flex items-center gap-1 bg-muted/50">
+                  <Clock className="w-3 h-3" />
+                  {formatDuration(course.duration_minutes)}
                 </Badge>
-                {course.duration_minutes && (
-                  <Badge variant="outline" className="text-xs flex items-center gap-1">
-                    <Clock className="w-3 h-3" />
-                    {formatDuration(course.duration_minutes)}
-                  </Badge>
-                )}
-              </div>
+              )}
+              {course.is_extra && (
+                <Badge className="bg-accent/20 text-accent border-accent/30 text-xs font-medium">
+                  Extra
+                </Badge>
+              )}
             </div>
           </div>
-          {course.is_extra && (
-            <Badge className="bg-accent text-accent-foreground">
-              Extra
-            </Badge>
-          )}
         </div>
         
-        <CardDescription className="text-muted-foreground leading-relaxed line-clamp-2">
+        <CardDescription className="text-muted-foreground leading-relaxed line-clamp-3 text-sm">
           {course.description}
         </CardDescription>
       </CardHeader>
       
-      <CardContent className="space-y-4">
+      <CardContent className="space-y-5 p-6 pt-0">
         {progress !== undefined && (
-          <div className="space-y-2">
-            <div className="flex justify-between text-sm">
-              <span className="text-muted-foreground">Progresso</span>
-              <span className="font-medium">{Math.round(progress)}%</span>
+          <div className="space-y-3">
+            <div className="flex justify-between items-center text-sm">
+              <span className="text-muted-foreground font-medium">Progresso do Curso</span>
+              <span className={`font-bold ${progress === 100 ? 'text-green-400' : 'text-primary'}`}>
+                {Math.round(progress)}%
+              </span>
             </div>
-            <Progress value={progress} className="h-2" />
+            <Progress 
+              value={progress} 
+              className={`h-2.5 ${progress === 100 ? '[&>div]:bg-green-400' : ''}`} 
+            />
+            {progress === 100 && (
+              <div className="flex items-center gap-2 text-green-400 text-sm font-medium">
+                <Star className="w-4 h-4 fill-current" />
+                Curso Concluído!
+              </div>
+            )}
           </div>
         )}
         
-        <Button className="w-full gradient-primary hover:gradient-hover text-white font-medium">
-          {progress === 100 ? 'Revisar' : progress ? 'Continuar' : 'Começar'}
+        <Button className={`w-full font-semibold transition-all duration-300 ${
+          progress === 100 
+            ? 'bg-green-500 hover:bg-green-600 text-white shadow-lg hover:shadow-green-500/25' 
+            : 'gradient-primary hover:gradient-hover text-white shadow-lg hover:shadow-primary/25'
+        }`}>
+          {progress === 100 ? '✓ Revisar Conteúdo' : progress ? '▶ Continuar Curso' : '🚀 Começar Agora'}
         </Button>
       </CardContent>
     </Card>

@@ -157,35 +157,55 @@ export function AppSidebar() {
     items: typeof productionTools,
     title: string,
     icon: any,
-    colorClass: string
+    colorClass: string,
+    accentColor: string
   ) => (
-    <SidebarGroup className="mb-6">
-      <SidebarGroupLabel className={`font-semibold mb-3 px-3 py-2 rounded-lg ${colorClass} flex items-center gap-2`}>
-        {React.createElement(icon, { className: "w-4 h-4" })}
-        {!isCollapsed && title}
+    <SidebarGroup className="mb-8">
+      <SidebarGroupLabel className={`font-bold text-xs uppercase tracking-wider mb-4 px-4 py-3 rounded-xl ${colorClass} backdrop-blur-sm border border-white/5 flex items-center gap-3 shadow-sm`}>
+        <div className={`p-1.5 rounded-lg ${accentColor}`}>
+          {React.createElement(icon, { className: "w-3.5 h-3.5" })}
+        </div>
+        {!isCollapsed && <span className="text-foreground/90">{title}</span>}
       </SidebarGroupLabel>
       
       <SidebarGroupContent>
-        <SidebarMenu className="space-y-1">
+        <SidebarMenu className="space-y-1.5 px-2">
           {items.map((item) => (
             <SidebarMenuItem key={item.title}>
               <SidebarMenuButton 
                 onClick={() => handleToolClick(item.url)}
-                className={`group relative overflow-hidden transition-all duration-200 rounded-lg mx-1 ${
+                className={`group relative overflow-hidden transition-all duration-300 rounded-xl p-3 ${
                   isActive(item.url) 
-                    ? 'bg-primary/15 text-primary border border-primary/30 shadow-sm' 
-                    : 'hover:bg-accent/60 hover:shadow-sm'
+                    ? `bg-primary/15 text-primary border border-primary/30 shadow-md shadow-primary/10 scale-[1.02]` 
+                    : 'hover:bg-card/80 hover:shadow-soft hover:scale-[1.01] hover:border-border/40 border border-transparent'
                 }`}
                 tooltip={isCollapsed ? item.title : undefined}
               >
-                <item.icon className={`w-4 h-4 transition-colors ${
-                  isActive(item.url) ? 'text-primary' : 'text-muted-foreground group-hover:text-foreground'
-                }`} />
-                {!isCollapsed && (
-                  <div className="flex flex-col items-start">
-                    <span className="font-medium text-sm text-foreground">{item.title}</span>
-                    <span className="text-xs text-muted-foreground leading-tight">{item.description}</span>
+                <div className="flex items-center gap-3 w-full">
+                  <div className={`p-2 rounded-lg transition-all duration-300 ${
+                    isActive(item.url) 
+                      ? 'bg-primary/20 text-primary' 
+                      : 'bg-muted/50 text-muted-foreground group-hover:bg-accent/20 group-hover:text-accent'
+                  }`}>
+                    <item.icon className="w-4 h-4" />
                   </div>
+                  {!isCollapsed && (
+                    <div className="flex flex-col items-start flex-1 min-w-0">
+                      <span className={`font-semibold text-sm transition-colors ${
+                        isActive(item.url) ? 'text-primary' : 'text-foreground group-hover:text-accent'
+                      }`}>
+                        {item.title}
+                      </span>
+                      <span className="text-xs text-muted-foreground line-clamp-2 mt-0.5">
+                        {item.description}
+                      </span>
+                    </div>
+                  )}
+                </div>
+                
+                {/* Active indicator */}
+                {isActive(item.url) && (
+                  <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-8 bg-primary rounded-r-full" />
                 )}
               </SidebarMenuButton>
             </SidebarMenuItem>
@@ -196,31 +216,45 @@ export function AppSidebar() {
   );
 
   return (
-    <Sidebar className="border-r border-border/50 bg-card/50 backdrop-blur-xl">
-      <SidebarContent className="p-3">
-        {/* Dashboard */}
-        <SidebarGroup className="mb-6">
+    <Sidebar className="border-r border-border/30 gradient-surface backdrop-blur-xl shadow-lg">
+      <SidebarContent className="p-4 overflow-y-auto">
+        {/* Dashboard - Home Section */}
+        <SidebarGroup className="mb-8">
           <SidebarGroupContent>
             <SidebarMenu>
               {navigationItems.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton 
                     onClick={() => handleToolClick(item.url)}
-                    className={`group relative overflow-hidden transition-all duration-200 rounded-lg mb-2 ${
+                    className={`group relative overflow-hidden transition-all duration-300 rounded-xl p-4 mb-2 ${
                       isActive(item.url) 
-                        ? 'bg-primary/15 text-primary border border-primary/30 shadow-sm' 
-                        : 'hover:bg-accent/60 hover:shadow-sm'
+                        ? 'bg-primary/15 text-primary border border-primary/30 shadow-lg shadow-primary/20 scale-[1.02]' 
+                        : 'hover:bg-card/80 hover:shadow-soft hover:scale-[1.01] border border-transparent hover:border-border/40'
                     }`}
                     tooltip={isCollapsed ? item.title : undefined}
                   >
-                    <item.icon className={`w-5 h-5 transition-colors ${
-                      isActive(item.url) ? 'text-primary' : 'text-muted-foreground group-hover:text-foreground'
-                    }`} />
-                    {!isCollapsed && (
-                      <div className="flex flex-col items-start">
-                        <span className="font-semibold text-foreground">{item.title}</span>
-                        <span className="text-xs text-muted-foreground">{item.description}</span>
+                    <div className="flex items-center gap-3 w-full">
+                      <div className={`p-2.5 rounded-xl transition-all duration-300 ${
+                        isActive(item.url) 
+                          ? 'bg-primary/20 text-primary shadow-glow' 
+                          : 'bg-muted/50 text-muted-foreground group-hover:bg-primary/10 group-hover:text-primary'
+                      }`}>
+                        <item.icon className="w-5 h-5" />
                       </div>
+                      {!isCollapsed && (
+                        <div className="flex flex-col items-start flex-1">
+                          <span className={`font-bold text-base transition-colors ${
+                            isActive(item.url) ? 'text-primary' : 'text-foreground group-hover:text-primary'
+                          }`}>
+                            {item.title}
+                          </span>
+                          <span className="text-xs text-muted-foreground mt-0.5">{item.description}</span>
+                        </div>
+                      )}
+                    </div>
+                    
+                    {isActive(item.url) && (
+                      <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-10 bg-primary rounded-r-full shadow-glow" />
                     )}
                   </SidebarMenuButton>
                 </SidebarMenuItem>
@@ -229,13 +263,37 @@ export function AppSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
 
-        {!isCollapsed && <div className="h-px bg-border mx-3 mb-6" />}
+        {!isCollapsed && <div className="h-px bg-gradient-to-r from-transparent via-border to-transparent mx-4 mb-8" />}
 
-        {/* Seções organizadas com cores */}
-        {renderSection(productionTools, "Produção", Play, "bg-blue-500/10 text-blue-700 dark:text-blue-300")}
-        {renderSection(brandingTools, "Identidade Visual", Palette, "bg-purple-500/10 text-purple-700 dark:text-purple-300")}
-        {renderSection(growthTools, "Crescimento", BarChart3, "bg-green-500/10 text-green-700 dark:text-green-300")}
-        {renderSection(supportTools, "Suporte e Comunidade", Users, "bg-orange-500/10 text-orange-700 dark:text-orange-300")}
+        {/* Tool Sections with Modern Design */}
+        {renderSection(
+          productionTools, 
+          "Produção", 
+          Play, 
+          "bg-production-muted border-production/20", 
+          "bg-production/20"
+        )}
+        {renderSection(
+          brandingTools, 
+          "Identidade Visual", 
+          Palette, 
+          "bg-identity-muted border-identity/20", 
+          "bg-identity/20"
+        )}
+        {renderSection(
+          growthTools, 
+          "Crescimento", 
+          BarChart3, 
+          "bg-growth-muted border-growth/20", 
+          "bg-growth/20"
+        )}
+        {renderSection(
+          supportTools, 
+          "Suporte e Comunidade", 
+          Users, 
+          "bg-support-muted border-support/20", 
+          "bg-support/20"
+        )}
       </SidebarContent>
     </Sidebar>
   );
