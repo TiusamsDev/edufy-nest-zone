@@ -113,4 +113,11 @@ All colors MUST be HSL.
     background: rgba(34, 34, 34, 0.85);
     backdrop-filter: blur(10px);
   }
+
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
 }

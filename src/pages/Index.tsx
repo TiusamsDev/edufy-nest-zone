@@ -45,7 +45,10 @@ const Index = () => {
     <div className="min-h-screen bg-overlay">
       <Header />
       {currentView === 'dashboard' && (
-        <Dashboard onCourseClick={handleCourseClick} />
+        <Dashboard 
+          onCourseClick={handleCourseClick}
+          onNewCourse={() => window.location.href = '/new-course'}
+        />
       )}
       {currentView === 'course' && (
         <CoursePage courseId={selectedCourseId} onBack={handleBackToDashboard} />

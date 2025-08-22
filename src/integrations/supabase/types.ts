@@ -16,32 +16,44 @@ export type Database = {
     Tables: {
       courses: {
         Row: {
+          category: string | null
           created_at: string
           created_by: string | null
           description: string | null
+          duration_minutes: number | null
           id: string
           is_extra: boolean | null
+          is_featured: boolean | null
           is_published: boolean | null
+          level: string | null
           title: string
           updated_at: string
         }
         Insert: {
+          category?: string | null
           created_at?: string
           created_by?: string | null
           description?: string | null
+          duration_minutes?: number | null
           id?: string
           is_extra?: boolean | null
+          is_featured?: boolean | null
           is_published?: boolean | null
+          level?: string | null
           title: string
           updated_at?: string
         }
         Update: {
+          category?: string | null
           created_at?: string
           created_by?: string | null
           description?: string | null
+          duration_minutes?: number | null
           id?: string
           is_extra?: boolean | null
+          is_featured?: boolean | null
           is_published?: boolean | null
+          level?: string | null
           title?: string
           updated_at?: string
         }
