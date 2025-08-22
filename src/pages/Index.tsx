@@ -3,6 +3,8 @@ import { Navigate } from "react-router-dom";
 import { Header } from "@/components/Header";
 import { Dashboard } from "@/components/Dashboard";
 import { CoursePage } from "@/components/CoursePage";
+import { AppSidebar } from "@/components/AppSidebar";
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { useAuth } from "@/hooks/useAuth";
 import logo from "@/assets/logo.png";
 
@@ -42,18 +44,25 @@ const Index = () => {
   }
 
   return (
-    <div className="min-h-screen bg-overlay">
-      <Header />
-      {currentView === 'dashboard' && (
-        <Dashboard 
-          onCourseClick={handleCourseClick}
-          onNewCourse={() => window.location.href = '/new-course'}
-        />
-      )}
-      {currentView === 'course' && (
-        <CoursePage courseId={selectedCourseId} onBack={handleBackToDashboard} />
-      )}
-    </div>
+    <SidebarProvider>
+      <div className="min-h-screen bg-overlay flex w-full">
+        <AppSidebar />
+        <div className="flex-1 flex flex-col">
+          <Header />
+          <div className="flex-1">
+            {currentView === 'dashboard' && (
+              <Dashboard 
+                onCourseClick={handleCourseClick}
+                onNewCourse={() => window.location.href = '/new-course'}
+              />
+            )}
+            {currentView === 'course' && (
+              <CoursePage courseId={selectedCourseId} onBack={handleBackToDashboard} />
+            )}
+          </div>
+        </div>
+      </div>
+    </SidebarProvider>
   );
 };
 

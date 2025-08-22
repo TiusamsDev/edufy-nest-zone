@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { SidebarTrigger } from "@/components/ui/sidebar";
 import { useAuth } from "@/hooks/useAuth";
 import { Plus, Users, Settings, LogOut } from "lucide-react";
 import { useNavigate } from "react-router-dom";
@@ -25,6 +26,7 @@ export function Header() {
     <header className="gradient-card border-b border-border/50 px-6 py-4">
       <div className="flex items-center justify-between max-w-7xl mx-auto">
         <div className="flex items-center space-x-4">
+          <SidebarTrigger className="hover:bg-white/10 transition-colors" />
           <button 
             onClick={() => navigate('/')} 
             className="flex items-center space-x-4 hover:opacity-80 transition-opacity"
